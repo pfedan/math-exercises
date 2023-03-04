@@ -2,6 +2,7 @@
   "name": "math-exercises",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://pfedan.github.io/math-exercises/",
   "dependencies": {
     "@chakra-ui/react": "^2.5.1",
     "@emotion/react": "^11.10.6",
