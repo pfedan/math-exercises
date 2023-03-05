@@ -1,6 +1,7 @@
 import { ChakraProvider, Box, theme, Flex, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
 import { ColorModeSwitcher } from './ColorModeSwitcher'
 import { AddSubtractTab } from './tabs/AddSubtractTab'
+import { HouseTab } from './tabs/HouseTab'
 import { PyramidTab } from './tabs/PyramidTab'
 
 export const App = () => {
@@ -16,7 +17,7 @@ export const App = () => {
             <TabList className="no-print">
               <Tab>Calc-a-gap</Tab>
               <Tab>Pyramids</Tab>
-              <Tab>Surprise</Tab>
+              <Tab>House</Tab>
             </TabList>
 
             <TabPanels>
@@ -27,7 +28,7 @@ export const App = () => {
                 <PyramidTab />
               </TabPanel>
               <TabPanel>
-                <p>Can't wait to see it!</p>
+                <HouseTab />
               </TabPanel>
             </TabPanels>
           </Tabs>
