@@ -1,4 +1,5 @@
 import { Td, Tr } from "@chakra-ui/react";
+import React from "react";
 import { rng } from "../utils";
 
 type AddSubtractProps = {
@@ -8,10 +9,11 @@ type AddSubtractProps = {
   forcePositiveResult?: boolean;
 };
 
-type AddSubtractExercise = {
+export type AddSubtractExercise = {
   summands: number[];
   signs: ("+" | "-")[];
   result: number;
+  gapPosition: number;
 };
 
 export const AddSubtract = ({
@@ -32,7 +34,9 @@ export const AddSubtract = ({
       return sign === "+" ? p + c : p - c;
     }, 0);
 
-    return { summands, signs, result };
+    const gapPosition = rng.int(0, numSummands);
+
+    return { summands, signs, result, gapPosition };
   };
 
   let exercise: AddSubtractExercise = generate();
@@ -40,20 +44,20 @@ export const AddSubtract = ({
     exercise = generate();
   }
 
-  const gapPosition = rng.int(0, numSummands);
-
   return (
     <Tr>
       {exercise.summands.map((n, i) => {
         return (
-          <>
-            <Td>{i === gapPosition ? "__" : n}</Td>
-            {i < exercise.signs.length ? <Td>{exercise.signs[i]}</Td> : null}
-          </>
+          <React.Fragment key={i.toString()}>
+            <Td>{i === exercise.gapPosition ? "__" : n}</Td>
+            {i < exercise.signs.length ? (
+              <Td>{exercise.signs[i]}</Td>
+            ) : undefined}
+          </React.Fragment>
         );
       })}
       <Td>=</Td>
-      <Td>{gapPosition === numSummands ? "__" : exercise.result}</Td>
+      <Td>{exercise.gapPosition === numSummands ? "__" : exercise.result}</Td>
     </Tr>
   );
 };

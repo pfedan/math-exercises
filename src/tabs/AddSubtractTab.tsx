@@ -29,14 +29,15 @@ export const AddSubtractTab = () => {
     exerciseCount: 10,
   });
 
-  const [exercises, setExercises] = useState<JSX.Element[]>([<></>]);
+  const [exercises, setExercises] = useState<JSX.Element[]>([]);
 
   rng.setSeed(Math.random());
 
   const generateExercises = useCallback(() => {
-    const exercises = Array.from({ length: settings.exerciseCount }, () => (
-      <AddSubtract {...settings} />
-    ));
+    const exercises = Array.from(
+      { length: settings.exerciseCount },
+      (_, index) => <AddSubtract key={index.toString()} {...settings} />
+    );
     setExercises(exercises);
   }, [settings]);
 

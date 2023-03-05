@@ -20,13 +20,13 @@ export const PyramidTab = () => {
     rows: 6,
   });
 
-  const [exercises, setExercises] = useState<JSX.Element[]>([<></>]);
+  const [exercises, setExercises] = useState<JSX.Element[]>([]);
 
   rng.setSeed(Math.random());
 
   const generateExercises = useCallback(() => {
-    const exercises = Array.from({ length: settings.rows * 3 }, () => (
-      <Pyramid {...settings} />
+    const exercises = Array.from({ length: settings.rows * 3 }, (_, index) => (
+      <Pyramid key={index.toString()} {...settings} />
     ));
     setExercises(exercises);
   }, [settings]);
