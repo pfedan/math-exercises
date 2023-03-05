@@ -1,5 +1,13 @@
-import { Flex, Center, TableContainer, Table, Tbody } from "@chakra-ui/react";
-import { useState } from "react";
+import {
+  Flex,
+  Center,
+  TableContainer,
+  Table,
+  Tbody,
+  Button,
+} from "@chakra-ui/react";
+import { useCallback, useEffect, useState } from "react";
+import { FaRandom } from "react-icons/fa";
 import { AddSubtract } from "../Components/AddSubtract";
 import { Setting } from "../Components/Setting";
 import { rng } from "../utils";
@@ -21,11 +29,24 @@ export const AddSubtractTab = () => {
     exerciseCount: 10,
   });
 
+  const [exercises, setExercises] = useState<JSX.Element[]>([<></>]);
+
   rng.setSeed(Math.random());
 
-  const exercises = Array.from({ length: settings.exerciseCount }, () => (
-    <AddSubtract {...settings} />
-  ));
+  const generateExercises = useCallback(() => {
+    const exercises = Array.from({ length: settings.exerciseCount }, () => (
+      <AddSubtract {...settings} />
+    ));
+    setExercises(exercises);
+  }, [settings]);
+
+  useEffect(() => {
+    generateExercises();
+  }, [settings, generateExercises]);
+
+  const handleReGenerate = () => {
+    generateExercises();
+  };
 
   const handleCountChange = (exerciseCount: number) => {
     setSettings({
@@ -47,7 +68,10 @@ export const AddSubtractTab = () => {
 
   return (
     <>
-      <Flex direction="column" gap={4} className="no-print">
+      <Flex direction="column" gap={4} className="no-print" mb={6} maxW="250px">
+        <Button leftIcon={<FaRandom />} onClick={handleReGenerate}>
+          Re-generate
+        </Button>
         <Setting
           title="Count"
           max={100}
