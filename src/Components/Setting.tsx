@@ -7,14 +7,14 @@ import {
   NumberIncrementStepper,
   NumberDecrementStepper,
   Text,
-} from "@chakra-ui/react";
+} from '@chakra-ui/react'
 
 export const Setting = (props: {
-  title: string;
-  val: number;
-  onChange: (n: number) => void;
-  min: number;
-  max: number;
+  title: string
+  val: number
+  onChange: (n: number) => void
+  min: number
+  max: number
 }) => (
   <Flex width="fit-content" gap={4} alignItems="center" minWidth="250px">
     <Text>{props.title}:</Text>
@@ -34,4 +34,4 @@ export const Setting = (props: {
       </NumberInputStepper>
     </NumberInput>
   </Flex>
-);
+)

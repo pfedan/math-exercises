@@ -1,16 +1,16 @@
-import { Flex, Center, Grid, Button } from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
-import { FaRandom } from "react-icons/fa";
-import Pyramid from "../Components/Pyramid";
-import { Setting } from "../Components/Setting";
-import { rng } from "../utils";
+import { Flex, Center, Grid, Button } from '@chakra-ui/react'
+import { useCallback, useEffect, useState } from 'react'
+import { FaRandom } from 'react-icons/fa'
+import Pyramid from '../Components/Pyramid'
+import { Setting } from '../Components/Setting'
+import { rng } from '../utils'
 
 type PyramidSettings = {
-  minValue: number;
-  maxValue: number;
-  gaps: 1 | 2 | 3;
-  rows: number;
-};
+  minValue: number
+  maxValue: number
+  gaps: 1 | 2 | 3
+  rows: number
+}
 
 export const PyramidTab = () => {
   const [settings, setSettings] = useState<PyramidSettings>({
@@ -18,40 +18,40 @@ export const PyramidTab = () => {
     maxValue: 10,
     gaps: 3,
     rows: 6,
-  });
+  })
 
-  const [exercises, setExercises] = useState<JSX.Element[]>([]);
+  const [exercises, setExercises] = useState<JSX.Element[]>([])
 
-  rng.setSeed(Math.random());
+  rng.setSeed(Math.random())
 
   const generateExercises = useCallback(() => {
     const exercises = Array.from({ length: settings.rows * 3 }, (_, index) => (
       <Pyramid key={index.toString()} {...settings} />
-    ));
-    setExercises(exercises);
-  }, [settings]);
+    ))
+    setExercises(exercises)
+  }, [settings])
 
   useEffect(() => {
-    generateExercises();
-  }, [settings, generateExercises]);
+    generateExercises()
+  }, [settings, generateExercises])
 
   const handleReGenerate = () => {
-    generateExercises();
-  };
+    generateExercises()
+  }
 
   const handleCountChange = (rows: number) => {
     setSettings({
       ...settings,
       rows: rows > 100 ? 100 : rows,
-    });
-  };
+    })
+  }
 
   const handleMinSummandAbsValueChange = (minValue: number) => {
-    setSettings({ ...settings, minValue });
-  };
+    setSettings({ ...settings, minValue })
+  }
   const handleMaxSummandAbsValueChange = (maxValue: number) => {
-    setSettings({ ...settings, maxValue });
-  };
+    setSettings({ ...settings, maxValue })
+  }
 
   return (
     <>
@@ -59,13 +59,7 @@ export const PyramidTab = () => {
         <Button leftIcon={<FaRandom />} onClick={handleReGenerate}>
           Re-generate
         </Button>
-        <Setting
-          title="Rows"
-          max={100}
-          min={1}
-          val={settings.rows}
-          onChange={handleCountChange}
-        />
+        <Setting title="Rows" max={100} min={1} val={settings.rows} onChange={handleCountChange} />
         <Setting
           title="min value"
           max={settings.maxValue - 1}
@@ -88,5 +82,5 @@ export const PyramidTab = () => {
         </Grid>
       </Center>
     </>
-  );
-};
+  )
+}

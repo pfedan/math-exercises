@@ -1,24 +1,17 @@
-import {
-  Flex,
-  Center,
-  TableContainer,
-  Table,
-  Tbody,
-  Button,
-} from "@chakra-ui/react";
-import { useCallback, useEffect, useState } from "react";
-import { FaRandom } from "react-icons/fa";
-import { AddSubtract } from "../Components/AddSubtract";
-import { Setting } from "../Components/Setting";
-import { rng } from "../utils";
+import { Flex, Center, TableContainer, Table, Tbody, Button } from '@chakra-ui/react'
+import { useCallback, useEffect, useState } from 'react'
+import { FaRandom } from 'react-icons/fa'
+import { AddSubtract } from '../Components/AddSubtract'
+import { Setting } from '../Components/Setting'
+import { rng } from '../utils'
 
 type AddSubtractSettings = {
-  numSummands: number;
-  minSummandAbsValue: number;
-  maxSummandAbsValue: number;
-  forcePositiveResult: boolean;
-  exerciseCount: number;
-};
+  numSummands: number
+  minSummandAbsValue: number
+  maxSummandAbsValue: number
+  forcePositiveResult: boolean
+  exerciseCount: number
+}
 
 export const AddSubtractTab = () => {
   const [settings, setSettings] = useState<AddSubtractSettings>({
@@ -27,45 +20,44 @@ export const AddSubtractTab = () => {
     maxSummandAbsValue: 10,
     forcePositiveResult: true,
     exerciseCount: 10,
-  });
+  })
 
-  const [exercises, setExercises] = useState<JSX.Element[]>([]);
+  const [exercises, setExercises] = useState<JSX.Element[]>([])
 
-  rng.setSeed(Math.random());
+  rng.setSeed(Math.random())
 
   const generateExercises = useCallback(() => {
-    const exercises = Array.from(
-      { length: settings.exerciseCount },
-      (_, index) => <AddSubtract key={index.toString()} {...settings} />
-    );
-    setExercises(exercises);
-  }, [settings]);
+    const exercises = Array.from({ length: settings.exerciseCount }, (_, index) => (
+      <AddSubtract key={index.toString()} {...settings} />
+    ))
+    setExercises(exercises)
+  }, [settings])
 
   useEffect(() => {
-    generateExercises();
-  }, [settings, generateExercises]);
+    generateExercises()
+  }, [settings, generateExercises])
 
   const handleReGenerate = () => {
-    generateExercises();
-  };
+    generateExercises()
+  }
 
   const handleCountChange = (exerciseCount: number) => {
     setSettings({
       ...settings,
       exerciseCount: exerciseCount > 100 ? 100 : exerciseCount,
-    });
-  };
+    })
+  }
 
   const handleNumSummandsChange = (numSummands: number) => {
-    setSettings({ ...settings, numSummands });
-  };
+    setSettings({ ...settings, numSummands })
+  }
 
   const handleMinSummandAbsValueChange = (minSummandAbsValue: number) => {
-    setSettings({ ...settings, minSummandAbsValue });
-  };
+    setSettings({ ...settings, minSummandAbsValue })
+  }
   const handleMaxSummandAbsValueChange = (maxSummandAbsValue: number) => {
-    setSettings({ ...settings, maxSummandAbsValue });
-  };
+    setSettings({ ...settings, maxSummandAbsValue })
+  }
 
   return (
     <>
@@ -73,20 +65,8 @@ export const AddSubtractTab = () => {
         <Button leftIcon={<FaRandom />} onClick={handleReGenerate}>
           Re-generate
         </Button>
-        <Setting
-          title="Count"
-          max={100}
-          min={1}
-          val={settings.exerciseCount}
-          onChange={handleCountChange}
-        />
-        <Setting
-          title="Summands"
-          max={8}
-          min={2}
-          val={settings.numSummands}
-          onChange={handleNumSummandsChange}
-        />
+        <Setting title="Count" max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
+        <Setting title="Summands" max={8} min={2} val={settings.numSummands} onChange={handleNumSummandsChange} />
         <Setting
           title="min value"
           max={settings.maxSummandAbsValue - 1}
@@ -104,12 +84,12 @@ export const AddSubtractTab = () => {
       </Flex>
 
       <Center>
-        <TableContainer width={"fit-content"}>
+        <TableContainer width={'fit-content'}>
           <Table>
             <Tbody>{exercises}</Tbody>
           </Table>
         </TableContainer>
       </Center>
     </>
-  );
-};
+  )
+}
