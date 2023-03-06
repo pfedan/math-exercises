@@ -1,5 +1,6 @@
 import { Flex, Grid } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import House from '../Components/House'
 import { Setting } from '../Components/Setting'
 import { rng } from '../utils'
@@ -12,6 +13,8 @@ type HouseSettings = {
 }
 
 export const HouseTabPanel = () => {
+  const { t } = useTranslation()
+
   const [settings, setSettings] = useState<HouseSettings>({
     minValue: 3,
     maxValue: 30,
@@ -53,16 +56,16 @@ export const HouseTabPanel = () => {
 
   const settingsMenu = (
     <Flex direction="column" gap={4} mb={6} maxW="250px">
-      <Setting title="Rows" max={100} min={1} val={settings.rows} onChange={handleCountChange} />
+      <Setting title={t`rows`} max={100} min={1} val={settings.rows} onChange={handleCountChange} />
       <Setting
-        title="min value"
+        title={t`minValue`}
         max={settings.maxValue - 1}
         min={3}
         val={settings.minValue}
         onChange={handleMinSummandAbsValueChange}
       />
       <Setting
-        title="max value"
+        title={t`maxValue`}
         max={100}
         min={settings.minValue + 1}
         val={settings.maxValue}

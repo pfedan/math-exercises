@@ -1,5 +1,6 @@
 import { Flex, Grid } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Pyramid from '../Components/Pyramid'
 import { Setting } from '../Components/Setting'
 import { rng } from '../utils'
@@ -13,6 +14,8 @@ type PyramidSettings = {
 }
 
 export const PyramidTabPanel = () => {
+  const { t } = useTranslation()
+
   const [settings, setSettings] = useState<PyramidSettings>({
     minValue: 0,
     maxValue: 10,
@@ -55,16 +58,16 @@ export const PyramidTabPanel = () => {
 
   const settingsMenu = (
     <Flex direction="column" gap={4} className="no-print" mb={6} maxW="250px">
-      <Setting title="Rows" max={100} min={1} val={settings.rows} onChange={handleCountChange} />
+      <Setting title={t`rows`} max={100} min={1} val={settings.rows} onChange={handleCountChange} />
       <Setting
-        title="min value"
+        title={t`minValue`}
         max={settings.maxValue - 1}
         min={0}
         val={settings.minValue}
         onChange={handleMinSummandAbsValueChange}
       />
       <Setting
-        title="max value"
+        title={t`minValue`}
         max={100}
         min={settings.minValue + 1}
         val={settings.maxValue}
