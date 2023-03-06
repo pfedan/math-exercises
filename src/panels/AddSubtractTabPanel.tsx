@@ -1,9 +1,9 @@
-import { Flex, Center, TableContainer, Table, Tbody, Button } from '@chakra-ui/react'
+import { Flex, TableContainer, Table, Tbody } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
-import { FaRandom } from 'react-icons/fa'
 import { AddSubtract } from '../Components/AddSubtract'
 import { Setting } from '../Components/Setting'
 import { rng } from '../utils'
+import { ExerciseTab } from './ExerciseTabPanel'
 
 type AddSubtractSettings = {
   numSummands: number
@@ -13,7 +13,7 @@ type AddSubtractSettings = {
   exerciseCount: number
 }
 
-export const AddSubtractTab = () => {
+export const AddSubtractTabPanel = () => {
   const [settings, setSettings] = useState<AddSubtractSettings>({
     numSummands: 3,
     minSummandAbsValue: 0,
@@ -59,37 +59,34 @@ export const AddSubtractTab = () => {
     setSettings({ ...settings, maxSummandAbsValue })
   }
 
-  return (
-    <>
-      <Flex direction="column" gap={4} className="no-print" mb={6} maxW="250px">
-        <Button leftIcon={<FaRandom />} onClick={handleReGenerate}>
-          Re-generate
-        </Button>
-        <Setting title="Count" max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
-        <Setting title="Summands" max={8} min={2} val={settings.numSummands} onChange={handleNumSummandsChange} />
-        <Setting
-          title="min value"
-          max={settings.maxSummandAbsValue - 1}
-          min={0}
-          val={settings.minSummandAbsValue}
-          onChange={handleMinSummandAbsValueChange}
-        />
-        <Setting
-          title="max value"
-          max={100}
-          min={settings.minSummandAbsValue + 1}
-          val={settings.maxSummandAbsValue}
-          onChange={handleMaxSummandAbsValueChange}
-        />
-      </Flex>
+  const settingsMenu = (
+    <Flex direction="column" gap={4} mb={6} maxW="250px">
+      <Setting title="Count" max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
+      <Setting title="Summands" max={8} min={2} val={settings.numSummands} onChange={handleNumSummandsChange} />
+      <Setting
+        title="min value"
+        max={settings.maxSummandAbsValue - 1}
+        min={0}
+        val={settings.minSummandAbsValue}
+        onChange={handleMinSummandAbsValueChange}
+      />
+      <Setting
+        title="max value"
+        max={100}
+        min={settings.minSummandAbsValue + 1}
+        val={settings.maxSummandAbsValue}
+        onChange={handleMaxSummandAbsValueChange}
+      />
+    </Flex>
+  )
 
-      <Center>
-        <TableContainer width={'fit-content'}>
-          <Table>
-            <Tbody>{exercises}</Tbody>
-          </Table>
-        </TableContainer>
-      </Center>
-    </>
+  return (
+    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+      <TableContainer width={'fit-content'}>
+        <Table>
+          <Tbody>{exercises}</Tbody>
+        </Table>
+      </TableContainer>
+    </ExerciseTab>
   )
 }

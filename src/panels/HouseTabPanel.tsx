@@ -1,9 +1,9 @@
-import { Flex, Center, Grid, Button } from '@chakra-ui/react'
+import { Flex, Grid } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
-import { FaRandom } from 'react-icons/fa'
 import House from '../Components/House'
 import { Setting } from '../Components/Setting'
 import { rng } from '../utils'
+import { ExerciseTab } from './ExerciseTabPanel'
 
 type HouseSettings = {
   minValue: number
@@ -11,7 +11,7 @@ type HouseSettings = {
   rows: number
 }
 
-export const HouseTab = () => {
+export const HouseTabPanel = () => {
   const [settings, setSettings] = useState<HouseSettings>({
     minValue: 3,
     maxValue: 30,
@@ -51,34 +51,31 @@ export const HouseTab = () => {
     setSettings({ ...settings, maxValue })
   }
 
-  return (
-    <>
-      <Flex direction="column" gap={4} className="no-print" mb={6} maxW="250px">
-        <Button leftIcon={<FaRandom />} onClick={handleReGenerate}>
-          Re-generate
-        </Button>
-        <Setting title="Rows" max={100} min={1} val={settings.rows} onChange={handleCountChange} />
-        <Setting
-          title="min value"
-          max={settings.maxValue - 1}
-          min={3}
-          val={settings.minValue}
-          onChange={handleMinSummandAbsValueChange}
-        />
-        <Setting
-          title="max value"
-          max={100}
-          min={settings.minValue + 1}
-          val={settings.maxValue}
-          onChange={handleMaxSummandAbsValueChange}
-        />
-      </Flex>
+  const settingsMenu = (
+    <Flex direction="column" gap={4} mb={6} maxW="250px">
+      <Setting title="Rows" max={100} min={1} val={settings.rows} onChange={handleCountChange} />
+      <Setting
+        title="min value"
+        max={settings.maxValue - 1}
+        min={3}
+        val={settings.minValue}
+        onChange={handleMinSummandAbsValueChange}
+      />
+      <Setting
+        title="max value"
+        max={100}
+        min={settings.minValue + 1}
+        val={settings.maxValue}
+        onChange={handleMaxSummandAbsValueChange}
+      />
+    </Flex>
+  )
 
-      <Center>
-        <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-          {exercises.map((e) => e)}
-        </Grid>
-      </Center>
-    </>
+  return (
+    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+      <Grid templateColumns="repeat(4, 1fr)" gap={6}>
+        {exercises.map((e) => e)}
+      </Grid>
+    </ExerciseTab>
   )
 }

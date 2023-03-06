@@ -1,8 +1,8 @@
-import { ChakraProvider, Box, theme, Flex, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs } from '@chakra-ui/react'
-import { ColorModeSwitcher } from './ColorModeSwitcher'
-import { AddSubtractTab } from './tabs/AddSubtractTab'
-import { HouseTab } from './tabs/HouseTab'
-import { PyramidTab } from './tabs/PyramidTab'
+import { ChakraProvider, Box, theme, Flex, Spacer, Tab, TabList, TabPanels, Tabs } from '@chakra-ui/react'
+import { ColorModeSwitcher } from './Components/ColorModeSwitcher'
+import { AddSubtractTabPanel } from './panels/AddSubtractTabPanel'
+import { HouseTabPanel } from './panels/HouseTabPanel'
+import { PyramidTabPanel } from './panels/PyramidTabPanel'
 
 export const App = () => {
   return (
@@ -13,7 +13,7 @@ export const App = () => {
             <Spacer />
             <ColorModeSwitcher justifySelf="flex-end" />
           </Flex>
-          <Tabs>
+          <Tabs align="center">
             <TabList className="no-print">
               <Tab>Calc-a-gap</Tab>
               <Tab>Pyramids</Tab>
@@ -21,15 +21,9 @@ export const App = () => {
             </TabList>
 
             <TabPanels>
-              <TabPanel>
-                <AddSubtractTab />
-              </TabPanel>
-              <TabPanel>
-                <PyramidTab />
-              </TabPanel>
-              <TabPanel>
-                <HouseTab />
-              </TabPanel>
+              <AddSubtractTabPanel />
+              <PyramidTabPanel />
+              <HouseTabPanel />
             </TabPanels>
           </Tabs>
         </Flex>
