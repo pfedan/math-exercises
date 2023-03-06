@@ -12,6 +12,7 @@ import {
   PopoverBody,
   TabPanel,
 } from '@chakra-ui/react'
+import { useTranslation } from 'react-i18next'
 import { FaRandom, FaWrench } from 'react-icons/fa'
 
 type ExerciseTabProps = {
@@ -20,6 +21,8 @@ type ExerciseTabProps = {
   children: string | JSX.Element | JSX.Element[]
 }
 export const ExerciseTab = (props: ExerciseTabProps) => {
+  const { t } = useTranslation()
+
   return (
     <TabPanel>
       <Center>
@@ -27,6 +30,7 @@ export const ExerciseTab = (props: ExerciseTabProps) => {
           <Flex direction="column" gap={4} className="no-print">
             <IconButton
               icon={<FaRandom />}
+              title={t('reCalculate') ?? ''}
               onClick={props.handleReGenerate}
               aria-label="re-generate"
               width="fit-content"
@@ -37,6 +41,7 @@ export const ExerciseTab = (props: ExerciseTabProps) => {
               <PopoverTrigger>
                 <IconButton
                   icon={<FaWrench />}
+                  title={t('settings') ?? ''}
                   aria-label="settings"
                   width="fit-content"
                   borderRadius={'50%'}
@@ -47,7 +52,7 @@ export const ExerciseTab = (props: ExerciseTabProps) => {
                 <PopoverArrow />
                 <PopoverCloseButton />
                 <PopoverHeader>
-                  <Text fontWeight="bold">Settings</Text>
+                  <Text fontWeight="bold">{t`settings`}</Text>
                 </PopoverHeader>
                 <PopoverBody>{props.settings}</PopoverBody>
               </PopoverContent>

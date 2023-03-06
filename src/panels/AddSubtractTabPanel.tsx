@@ -1,5 +1,6 @@
 import { Flex, TableContainer, Table, Tbody } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { AddSubtract } from '../Components/AddSubtract'
 import { Setting } from '../Components/Setting'
 import { rng } from '../utils'
@@ -14,6 +15,8 @@ type AddSubtractSettings = {
 }
 
 export const AddSubtractTabPanel = () => {
+  const { t } = useTranslation()
+
   const [settings, setSettings] = useState<AddSubtractSettings>({
     numSummands: 3,
     minSummandAbsValue: 0,
@@ -61,17 +64,17 @@ export const AddSubtractTabPanel = () => {
 
   const settingsMenu = (
     <Flex direction="column" gap={4} mb={6} maxW="250px">
-      <Setting title="Count" max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
-      <Setting title="Summands" max={8} min={2} val={settings.numSummands} onChange={handleNumSummandsChange} />
+      <Setting title={t`count`} max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
+      <Setting title={t`summandCount`} max={8} min={2} val={settings.numSummands} onChange={handleNumSummandsChange} />
       <Setting
-        title="min value"
+        title={t`minValue`}
         max={settings.maxSummandAbsValue - 1}
         min={0}
         val={settings.minSummandAbsValue}
         onChange={handleMinSummandAbsValueChange}
       />
       <Setting
-        title="max value"
+        title={t`maxValue`}
         max={100}
         min={settings.minSummandAbsValue + 1}
         val={settings.maxSummandAbsValue}
