@@ -28,15 +28,6 @@ export const ExerciseTabPanel = (props: ExerciseTabProps) => {
       <Center>
         <Flex gap={8}>
           <Flex direction="column" gap={4} className="no-print">
-            <IconButton
-              icon={<FaRandom />}
-              title={t('reCalculate') ?? ''}
-              onClick={props.handleReGenerate}
-              aria-label="re-generate"
-              width="fit-content"
-              borderRadius={'50%'}
-              size="lg"
-            />
             <Popover placement="left-start" closeOnBlur>
               <PopoverTrigger>
                 <IconButton
@@ -57,6 +48,15 @@ export const ExerciseTabPanel = (props: ExerciseTabProps) => {
                 <PopoverBody>{props.settings}</PopoverBody>
               </PopoverContent>
             </Popover>
+            <IconButton
+              icon={<FaRandom />}
+              title={t('reCalculate') ?? ''}
+              onClick={props.handleReGenerate}
+              aria-label="re-generate"
+              width="fit-content"
+              borderRadius={'50%'}
+              size="lg"
+            />
           </Flex>
           {props.children}
         </Flex>
