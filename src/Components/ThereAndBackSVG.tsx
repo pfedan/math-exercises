@@ -17,9 +17,8 @@ export const ThereAndBackSVG = ({ fields, type }: { fields: (number | null)[]; t
   }
 
   const markerStyle: React.CSSProperties = {
-    fill: 'context-fill',
+    fill: darkModeActive ? '#ffffffb0' : 'black',
     fillRule: 'evenodd',
-    stroke: 'context-stroke',
     strokeWidth: 0.6,
   }
 
