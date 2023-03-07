@@ -2,7 +2,7 @@ import { Flex, Grid } from '@chakra-ui/react'
 import { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import House from '../Components/House'
-import { Setting } from '../Components/Setting'
+import { NumericSetting } from '../Components/Setting'
 import { rng } from '../utils'
 import { ExerciseTab } from './ExerciseTabPanel'
 
@@ -56,15 +56,15 @@ export const HouseTabPanel = () => {
 
   const settingsMenu = (
     <Flex direction="column" gap={4} mb={6} maxW="250px">
-      <Setting title={t`rows`} max={100} min={1} val={settings.rows} onChange={handleCountChange} />
-      <Setting
+      <NumericSetting title={t`rows`} max={100} min={1} val={settings.rows} onChange={handleCountChange} />
+      <NumericSetting
         title={t`minValue`}
         max={settings.maxValue - 1}
         min={3}
         val={settings.minValue}
         onChange={handleMinSummandAbsValueChange}
       />
-      <Setting
+      <NumericSetting
         title={t`maxValue`}
         max={100}
         min={settings.minValue + 1}

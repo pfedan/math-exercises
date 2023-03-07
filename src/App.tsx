@@ -3,7 +3,6 @@ import {
   Box,
   theme,
   Flex,
-  Spacer,
   Tab,
   TabList,
   TabPanels,
@@ -21,6 +20,7 @@ import { AddSubtractTabPanel } from './panels/AddSubtractTabPanel'
 import { HouseTabPanel } from './panels/HouseTabPanel'
 import { PyramidTabPanel } from './panels/PyramidTabPanel'
 import ReactCountryFlag from 'react-country-flag'
+import { ThereAndBackTabPanel } from './panels/ThereAndBackTabPanel'
 
 export const App = () => {
   const { t, i18n } = useTranslation()
@@ -30,8 +30,7 @@ export const App = () => {
     <ChakraProvider theme={theme}>
       <Box>
         <Flex direction="column" p={3}>
-          <Flex alignItems={'end'} className="no-print">
-            <Spacer />
+          <Flex justifyContent={'end'} className="no-print">
             <Menu>
               <MenuButton as={IconButton} icon={<ReactCountryFlag countryCode={flagCode} />} />
               <MenuList>
@@ -54,12 +53,14 @@ export const App = () => {
               <Tab>{t`addSubtract`}</Tab>
               <Tab>{t`pyramids`}</Tab>
               <Tab>{t`houses`}</Tab>
+              <Tab>{t`thereAndBack`}</Tab>
             </TabList>
 
             <TabPanels>
               <AddSubtractTabPanel />
               <PyramidTabPanel />
               <HouseTabPanel />
+              <ThereAndBackTabPanel />
             </TabPanels>
           </Tabs>
         </Flex>

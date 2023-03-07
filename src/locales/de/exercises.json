@@ -1,12 +1,17 @@
 {
+  "add": "Addition",
   "addSubtract": "Lückenrechnen",
   "count": "Anzahl",
   "houses": "Rechenhäuser",
   "minValue": "Min. Wert",
   "maxValue": "Max. Wert",
   "settings": "Einstellungen",
+  "sum": "Summe",
   "summandCount": "Summanden",
+  "product": "Produkt",
   "pyramids": "Pyramiden",
   "reCalculate": "neu berechnen",
-  "rows": "Zeilen"
+  "rows": "Zeilen",
+  "thereAndBack": "Hin-und-zurück",
+  "type": "Art"
 }

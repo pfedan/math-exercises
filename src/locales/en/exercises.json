@@ -5,8 +5,12 @@
   "minValue": "Min. value",
   "maxValue": "Max. value",
   "settings": "Settings",
+  "sum": "Sum",
   "summandCount": "Summands",
+  "product": "Product",
   "pyramids": "Pyramids",
   "reCalculate": "Re-calculate",
-  "rows": "Rows"
+  "rows": "Rows",
+  "thereAndBack": "There-and-back",
+  "type": "Type"
 }

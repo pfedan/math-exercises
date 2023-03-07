@@ -9,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 
-export const Setting = (props: {
+export const NumericSetting = (props: {
   title: string
   val: number
   onChange: (n: number) => void
