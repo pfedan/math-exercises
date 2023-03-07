@@ -1,6 +1,10 @@
 {
+  "addPanelsHeader": "Add a section",
+  "add": "Addition",
   "addSubtract": "Calc-a-gap",
+  "compose": "🛠️ Compose your own!",
   "count": "Count",
+  "deleteAll": "Delete all",
   "houses": "Houses",
   "minValue": "Min. value",
   "maxValue": "Max. value",

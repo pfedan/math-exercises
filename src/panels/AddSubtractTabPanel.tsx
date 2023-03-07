@@ -4,33 +4,35 @@ import { useTranslation } from 'react-i18next'
 import { AddSubtract } from '../Components/AddSubtract'
 import { NumericSetting } from '../Components/Setting'
 import { rng } from '../utils'
-import { ExerciseTab } from './ExerciseTabPanel'
+import { ExerciseTabPanel } from './ExerciseTabPanel'
 
 type AddSubtractSettings = {
   numSummands: number
   minSummandAbsValue: number
   maxSummandAbsValue: number
   forcePositiveResult: boolean
-  exerciseCount: number
+  rows: number
 }
 
-export const AddSubtractTabPanel = () => {
+AddSubtractTabPanel.defaultProps = {
+  numSummands: 3,
+  minSummandAbsValue: 0,
+  maxSummandAbsValue: 10,
+  forcePositiveResult: true,
+  rows: 10,
+}
+
+export default function AddSubtractTabPanel(props: AddSubtractSettings) {
   const { t } = useTranslation()
 
-  const [settings, setSettings] = useState<AddSubtractSettings>({
-    numSummands: 3,
-    minSummandAbsValue: 0,
-    maxSummandAbsValue: 10,
-    forcePositiveResult: true,
-    exerciseCount: 10,
-  })
+  const [settings, setSettings] = useState<AddSubtractSettings>(props)
 
   const [exercises, setExercises] = useState<JSX.Element[]>([])
 
   rng.setSeed(Math.random())
 
   const generateExercises = useCallback(() => {
-    const exercises = Array.from({ length: settings.exerciseCount }, (_, index) => (
+    const exercises = Array.from({ length: settings.rows }, (_, index) => (
       <AddSubtract key={index.toString()} {...settings} />
     ))
     setExercises(exercises)
@@ -47,7 +49,7 @@ export const AddSubtractTabPanel = () => {
   const handleCountChange = (exerciseCount: number) => {
     setSettings({
       ...settings,
-      exerciseCount: exerciseCount > 100 ? 100 : exerciseCount,
+      rows: exerciseCount > 100 ? 100 : exerciseCount,
     })
   }
 
@@ -64,7 +66,7 @@ export const AddSubtractTabPanel = () => {
 
   const settingsMenu = (
     <Flex direction="column" gap={4} mb={6} maxW="250px">
-      <NumericSetting title={t`count`} max={100} min={1} val={settings.exerciseCount} onChange={handleCountChange} />
+      <NumericSetting title={t`count`} max={100} min={1} val={settings.rows} onChange={handleCountChange} />
       <NumericSetting
         title={t`summandCount`}
         max={8}
@@ -90,12 +92,12 @@ export const AddSubtractTabPanel = () => {
   )
 
   return (
-    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+    <ExerciseTabPanel handleReGenerate={handleReGenerate} settings={settingsMenu}>
       <TableContainer width={'fit-content'}>
         <Table>
           <Tbody>{exercises}</Tbody>
         </Table>
       </TableContainer>
-    </ExerciseTab>
+    </ExerciseTabPanel>
   )
 }

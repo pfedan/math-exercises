@@ -1,7 +1,10 @@
 {
+  "addPanelsHeader": "Abschnitt hinzufügen",
   "add": "Addition",
   "addSubtract": "Lückenrechnen",
   "count": "Anzahl",
+  "compose": "🛠️ Stelle selbst zusammen!",
+  "deleteAll": "Löschen all",
   "houses": "Rechenhäuser",
   "minValue": "Min. Wert",
   "maxValue": "Max. Wert",

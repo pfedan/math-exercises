@@ -20,7 +20,7 @@ type ExerciseTabProps = {
   handleReGenerate: () => void
   children: string | JSX.Element | JSX.Element[]
 }
-export const ExerciseTab = (props: ExerciseTabProps) => {
+export const ExerciseTabPanel = (props: ExerciseTabProps) => {
   const { t } = useTranslation()
 
   return (
@@ -37,7 +37,7 @@ export const ExerciseTab = (props: ExerciseTabProps) => {
               borderRadius={'50%'}
               size="lg"
             />
-            <Popover placement="left-start">
+            <Popover placement="left-start" closeOnBlur>
               <PopoverTrigger>
                 <IconButton
                   icon={<FaWrench />}

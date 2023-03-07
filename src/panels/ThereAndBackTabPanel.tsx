@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { NumericSetting } from '../Components/Setting'
 import ThereAndBack from '../Components/ThereAndBack'
 import { rng } from '../utils'
-import { ExerciseTab } from './ExerciseTabPanel'
+import { ExerciseTabPanel } from './ExerciseTabPanel'
 
 type ThereAndBackSettings = {
   minValue: number
@@ -13,15 +13,17 @@ type ThereAndBackSettings = {
   rows: number
 }
 
-export const ThereAndBackTabPanel = () => {
+ThereAndBackTabPanel.defaultProps = {
+  minValue: 0,
+  maxValue: 10,
+  type: 'add',
+  rows: 6,
+}
+
+export default function ThereAndBackTabPanel(props: ThereAndBackSettings) {
   const { t } = useTranslation()
 
-  const [settings, setSettings] = useState<ThereAndBackSettings>({
-    minValue: 0,
-    maxValue: 10,
-    type: 'add',
-    rows: 6,
-  })
+  const [settings, setSettings] = useState<ThereAndBackSettings>(props)
 
   const [exercises, setExercises] = useState<JSX.Element[]>([])
 
@@ -91,10 +93,10 @@ export const ThereAndBackTabPanel = () => {
   )
 
   return (
-    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+    <ExerciseTabPanel handleReGenerate={handleReGenerate} settings={settingsMenu}>
       <Grid templateColumns="repeat(4, 1fr)" gap={12}>
         {exercises.map((e) => e)}
       </Grid>
-    </ExerciseTab>
+    </ExerciseTabPanel>
   )
 }

@@ -16,11 +16,12 @@ import {
 } from '@chakra-ui/react'
 import { useTranslation } from 'react-i18next'
 import { ColorModeSwitcher } from './Components/ColorModeSwitcher'
-import { AddSubtractTabPanel } from './panels/AddSubtractTabPanel'
-import { HouseTabPanel } from './panels/HouseTabPanel'
-import { PyramidTabPanel } from './panels/PyramidTabPanel'
+import AddSubtractTabPanel from './panels/AddSubtractTabPanel'
+import HouseTabPanel from './panels/HouseTabPanel'
+import PyramidTabPanel from './panels/PyramidTabPanel'
 import ReactCountryFlag from 'react-country-flag'
-import { ThereAndBackTabPanel } from './panels/ThereAndBackTabPanel'
+import ThereAndBackTabPanel from './panels/ThereAndBackTabPanel'
+import { ComposerTabPanel } from './panels/ComposerTabPanel'
 
 export const App = () => {
   const { t, i18n } = useTranslation()
@@ -54,6 +55,7 @@ export const App = () => {
               <Tab>{t`pyramids`}</Tab>
               <Tab>{t`houses`}</Tab>
               <Tab>{t`thereAndBack`}</Tab>
+              <Tab>{t`compose`}</Tab>
             </TabList>
 
             <TabPanels>
@@ -61,6 +63,7 @@ export const App = () => {
               <PyramidTabPanel />
               <HouseTabPanel />
               <ThereAndBackTabPanel />
+              <ComposerTabPanel />
             </TabPanels>
           </Tabs>
         </Flex>

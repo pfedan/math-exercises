@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import House from '../Components/House'
 import { NumericSetting } from '../Components/Setting'
 import { rng } from '../utils'
-import { ExerciseTab } from './ExerciseTabPanel'
+import { ExerciseTabPanel } from './ExerciseTabPanel'
 
 type HouseSettings = {
   minValue: number
@@ -12,14 +12,16 @@ type HouseSettings = {
   rows: number
 }
 
-export const HouseTabPanel = () => {
+HouseTabPanel.defaultProps = {
+  minValue: 3,
+  maxValue: 30,
+  rows: 5,
+}
+
+export default function HouseTabPanel(props: HouseSettings) {
   const { t } = useTranslation()
 
-  const [settings, setSettings] = useState<HouseSettings>({
-    minValue: 3,
-    maxValue: 30,
-    rows: 5,
-  })
+  const [settings, setSettings] = useState<HouseSettings>(props)
 
   const [exercises, setExercises] = useState<JSX.Element[]>([])
 
@@ -75,10 +77,10 @@ export const HouseTabPanel = () => {
   )
 
   return (
-    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+    <ExerciseTabPanel handleReGenerate={handleReGenerate} settings={settingsMenu}>
       <Grid templateColumns="repeat(4, 1fr)" gap={6}>
         {exercises.map((e) => e)}
       </Grid>
-    </ExerciseTab>
+    </ExerciseTabPanel>
   )
 }

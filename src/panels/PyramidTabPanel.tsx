@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import Pyramid from '../Components/Pyramid'
 import { NumericSetting } from '../Components/Setting'
 import { rng } from '../utils'
-import { ExerciseTab } from './ExerciseTabPanel'
+import { ExerciseTabPanel } from './ExerciseTabPanel'
 
 type PyramidSettings = {
   minValue: number
@@ -13,15 +13,17 @@ type PyramidSettings = {
   rows: number
 }
 
-export const PyramidTabPanel = () => {
+PyramidTabPanel.defaultProps = {
+  minValue: 0,
+  maxValue: 10,
+  gaps: 3,
+  rows: 6,
+}
+
+export default function PyramidTabPanel(props: PyramidSettings) {
   const { t } = useTranslation()
 
-  const [settings, setSettings] = useState<PyramidSettings>({
-    minValue: 0,
-    maxValue: 10,
-    gaps: 3,
-    rows: 6,
-  })
+  const [settings, setSettings] = useState<PyramidSettings>(props)
 
   const [exercises, setExercises] = useState<JSX.Element[]>([])
 
@@ -77,10 +79,10 @@ export const PyramidTabPanel = () => {
   )
 
   return (
-    <ExerciseTab handleReGenerate={handleReGenerate} settings={settingsMenu}>
+    <ExerciseTabPanel handleReGenerate={handleReGenerate} settings={settingsMenu}>
       <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         {exercises.map((e) => e)}
       </Grid>
-    </ExerciseTab>
+    </ExerciseTabPanel>
   )
 }
